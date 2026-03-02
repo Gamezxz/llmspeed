@@ -1,6 +1,6 @@
 "use client";
 
-import { Zap } from "lucide-react";
+import { Zap, Github } from "lucide-react";
 
 export default function Header() {
   return (
@@ -17,6 +17,15 @@ export default function Header() {
         Estimate token generation speed for any GPU + LLM combination.
         Compare hardware, check VRAM requirements, and find the best setup for your needs.
       </p>
+      <a
+        href="https://github.com/Gamezxz/llmspeed"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-300 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all"
+      >
+        <Github className="w-4 h-4" />
+        <span>Built by <span className="font-semibold text-white">Gamezxz</span></span>
+      </a>
     </header>
   );
 }
