@@ -15,6 +15,9 @@ export interface GPU {
   priceUSD?: number;
   tdpWatts?: number;
   architecture: string;
+  fp16TFLOPS?: number;
+  fp4Capable?: boolean;
+  memoryEfficiency?: number;
 }
 
 export interface LLMModel {
@@ -34,10 +37,13 @@ export interface Quantization {
   name: string;
   bitsPerWeight: number;
   description: string;
+  isHardwareNative?: boolean;
+  requiresHardwareSupport?: boolean;
 }
 
 export interface CalculationResult {
   tps: number;
+  prefillTps: number | null;
   modelVRAM: number;
   kvCache: number;
   overhead: number;
@@ -45,6 +51,7 @@ export interface CalculationResult {
   availableVRAM: number;
   fitsInVRAM: boolean;
   rating: PerformanceRating;
+  prefillRating: PerformanceRating | null;
   costPerToken?: number;
   costPer1MTokens?: number;
   electricityCostPerHour?: number;

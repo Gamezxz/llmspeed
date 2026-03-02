@@ -1,28 +1,40 @@
 "use client";
 
-import { Gauge, HardDrive, AlertTriangle } from "lucide-react";
-import { CalculationResult } from "@/types";
+import { Gauge, HardDrive, AlertTriangle, Zap } from "lucide-react";
+import { CalculationResult, GPU, Quantization } from "@/types";
 import { formatTPS, formatVRAM, getRatingBgClass, getRatingColor } from "@/lib/utils";
 
 interface Props {
   result: CalculationResult;
+  gpu: GPU;
+  quant: Quantization;
 }
 
-export default function ResultsCard({ result }: Props) {
+export default function ResultsCard({ result, gpu, quant }: Props) {
   const vramPercent = Math.min((result.totalVRAM / result.availableVRAM) * 100, 100);
   const modelPercent = (result.modelVRAM / result.availableVRAM) * 100;
   const kvPercent = (result.kvCache / result.availableVRAM) * 100;
   const overheadPercent = (result.overhead / result.availableVRAM) * 100;
 
+  const fp4Mismatch = quant.requiresHardwareSupport && !gpu.fp4Capable;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* Speed Card */}
       <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-        <div className="flex items-center gap-2 text-slate-400 mb-4">
+        {fp4Mismatch && (
+          <div className="flex items-center gap-2 text-amber-400 text-sm mb-4 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
+            <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+            <span>FP4 requires Blackwell hardware — severe performance penalty applied</span>
+          </div>
+        )}
+
+        {/* Decode Speed */}
+        <div className="flex items-center gap-2 text-slate-400 mb-3">
           <Gauge className="w-5 h-5" />
-          <span className="text-sm font-medium">Token Generation Speed</span>
+          <span className="text-sm font-medium">Decode (Token Generation)</span>
         </div>
-        <div className="flex items-end gap-3 mb-3">
+        <div className="flex items-end gap-3 mb-2">
           <span
             className="text-5xl font-bold tabular-nums"
             style={{ color: getRatingColor(result.rating) }}
@@ -34,6 +46,33 @@ export default function ResultsCard({ result }: Props) {
         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${getRatingBgClass(result.rating)}`}>
           {result.rating}
         </span>
+
+        {/* Divider */}
+        <div className="border-t border-white/5 my-4" />
+
+        {/* Prefill Speed */}
+        <div className="flex items-center gap-2 text-slate-400 mb-3">
+          <Zap className="w-5 h-5" />
+          <span className="text-sm font-medium">Prefill (Prompt Processing)</span>
+        </div>
+        {result.prefillTps !== null && result.prefillRating !== null ? (
+          <>
+            <div className="flex items-end gap-3 mb-2">
+              <span
+                className="text-4xl font-bold tabular-nums"
+                style={{ color: getRatingColor(result.prefillRating) }}
+              >
+                {formatTPS(result.prefillTps)}
+              </span>
+              <span className="text-slate-400 text-lg mb-1">tokens/sec</span>
+            </div>
+            <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${getRatingBgClass(result.prefillRating)}`}>
+              {result.prefillRating}
+            </span>
+          </>
+        ) : (
+          <div className="text-slate-600 text-sm">N/A — no TFLOPS data for this GPU</div>
+        )}
       </div>
 
       {/* VRAM Card */}

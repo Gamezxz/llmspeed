@@ -27,7 +27,14 @@ export default function QuantSelector({ selected, onSelect }: Props) {
                 : "bg-white/5 text-slate-400 border border-white/10 hover:border-white/20 hover:text-slate-300"
             }`}
           >
-            <div>{q.name}</div>
+            <div className="flex items-center gap-1.5">
+              {q.name}
+              {q.requiresHardwareSupport && (
+                <span className="px-1 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 leading-none">
+                  HW
+                </span>
+              )}
+            </div>
             <div className="text-[10px] opacity-70">{q.bitsPerWeight} bpw</div>
           </button>
         ))}

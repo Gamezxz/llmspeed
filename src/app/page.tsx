@@ -54,7 +54,7 @@ export default function Home() {
         {/* Results Section */}
         {result && gpu && model ? (
           <div className="space-y-6">
-            <ResultsCard result={result} />
+            <ResultsCard result={result} gpu={gpu} quant={quant} />
             <SpeedPreview tps={result.tps} />
             <CostAnalysis result={result} modelName={model.name} />
             <PerformanceChart

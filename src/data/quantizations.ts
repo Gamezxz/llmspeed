@@ -14,6 +14,14 @@ export const quantizations: Quantization[] = [
     description: "Heavy compression, noticeable quality loss",
   },
   {
+    id: "fp4",
+    name: "FP4",
+    bitsPerWeight: 4.0,
+    description: "4-bit floating point — requires Blackwell or newer hardware",
+    isHardwareNative: true,
+    requiresHardwareSupport: true,
+  },
+  {
     id: "q4_k_m",
     name: "Q4_K_M",
     bitsPerWeight: 4.8,

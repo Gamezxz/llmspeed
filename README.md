@@ -2,7 +2,7 @@
 
 Estimate token generation speed for any GPU + LLM combination. Compare hardware, check VRAM requirements, and find the best setup for your needs.
 
-**Live Demo:** [llmspeed.coinbx.com](https://llmspeed.coinbx.com/)
+**Live Demo:** [gamezxz.github.io/llmspeed](https://gamezxz.github.io/llmspeed/)
 
 ![LLM Speed Calculator](public/screenshot.png)
 

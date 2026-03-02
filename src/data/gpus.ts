@@ -11,6 +11,7 @@ export const gpus: GPU[] = [
     priceUSD: 300,
     tdpWatts: 160,
     architecture: "Turing",
+    fp16TFLOPS: 6.5,
   },
   {
     id: "rtx-2060-super",
@@ -21,6 +22,7 @@ export const gpus: GPU[] = [
     priceUSD: 400,
     tdpWatts: 175,
     architecture: "Turing",
+    fp16TFLOPS: 7.2,
   },
   {
     id: "rtx-2070",
@@ -31,6 +33,7 @@ export const gpus: GPU[] = [
     priceUSD: 500,
     tdpWatts: 175,
     architecture: "Turing",
+    fp16TFLOPS: 7.5,
   },
   {
     id: "rtx-2080-ti",
@@ -41,6 +44,7 @@ export const gpus: GPU[] = [
     priceUSD: 1200,
     tdpWatts: 250,
     architecture: "Turing",
+    fp16TFLOPS: 13.4,
   },
 
   // ─── NVIDIA Consumer (Ampere) ──────────────────────────────
@@ -53,6 +57,7 @@ export const gpus: GPU[] = [
     priceUSD: 330,
     tdpWatts: 170,
     architecture: "Ampere",
+    fp16TFLOPS: 12.7,
   },
   {
     id: "rtx-3070",
@@ -63,6 +68,7 @@ export const gpus: GPU[] = [
     priceUSD: 500,
     tdpWatts: 220,
     architecture: "Ampere",
+    fp16TFLOPS: 20.3,
   },
   {
     id: "rtx-3080",
@@ -73,6 +79,7 @@ export const gpus: GPU[] = [
     priceUSD: 700,
     tdpWatts: 320,
     architecture: "Ampere",
+    fp16TFLOPS: 29.8,
   },
   {
     id: "rtx-3080-12gb",
@@ -83,6 +90,7 @@ export const gpus: GPU[] = [
     priceUSD: 800,
     tdpWatts: 350,
     architecture: "Ampere",
+    fp16TFLOPS: 30.6,
   },
   {
     id: "rtx-3090",
@@ -93,6 +101,7 @@ export const gpus: GPU[] = [
     priceUSD: 1500,
     tdpWatts: 350,
     architecture: "Ampere",
+    fp16TFLOPS: 35.6,
   },
   {
     id: "rtx-3090-ti",
@@ -103,6 +112,7 @@ export const gpus: GPU[] = [
     priceUSD: 2000,
     tdpWatts: 450,
     architecture: "Ampere",
+    fp16TFLOPS: 40.0,
   },
 
   // ─── NVIDIA Consumer (Ada Lovelace) ────────────────────────
@@ -115,6 +125,7 @@ export const gpus: GPU[] = [
     priceUSD: 300,
     tdpWatts: 115,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 15.1,
   },
   {
     id: "rtx-4060-ti-8gb",
@@ -125,6 +136,7 @@ export const gpus: GPU[] = [
     priceUSD: 400,
     tdpWatts: 160,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 22.1,
   },
   {
     id: "rtx-4060-ti-16gb",
@@ -135,6 +147,7 @@ export const gpus: GPU[] = [
     priceUSD: 500,
     tdpWatts: 165,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 22.1,
   },
   {
     id: "rtx-4070",
@@ -145,6 +158,7 @@ export const gpus: GPU[] = [
     priceUSD: 600,
     tdpWatts: 200,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 29.1,
   },
   {
     id: "rtx-4070-super",
@@ -155,6 +169,7 @@ export const gpus: GPU[] = [
     priceUSD: 600,
     tdpWatts: 220,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 35.5,
   },
   {
     id: "rtx-4070-ti",
@@ -165,6 +180,7 @@ export const gpus: GPU[] = [
     priceUSD: 800,
     tdpWatts: 285,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 40.1,
   },
   {
     id: "rtx-4070-ti-super",
@@ -175,6 +191,7 @@ export const gpus: GPU[] = [
     priceUSD: 800,
     tdpWatts: 285,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 44.1,
   },
   {
     id: "rtx-4080",
@@ -185,6 +202,7 @@ export const gpus: GPU[] = [
     priceUSD: 1200,
     tdpWatts: 320,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 48.7,
   },
   {
     id: "rtx-4080-super",
@@ -195,6 +213,7 @@ export const gpus: GPU[] = [
     priceUSD: 1000,
     tdpWatts: 320,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 52.4,
   },
   {
     id: "rtx-4090",
@@ -205,6 +224,7 @@ export const gpus: GPU[] = [
     priceUSD: 1600,
     tdpWatts: 450,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 82.6,
   },
 
   // ─── NVIDIA Consumer (Blackwell) ───────────────────────────
@@ -217,6 +237,8 @@ export const gpus: GPU[] = [
     priceUSD: 299,
     tdpWatts: 150,
     architecture: "Blackwell",
+    fp16TFLOPS: 18.0,
+    fp4Capable: true,
   },
   {
     id: "rtx-5060-ti-8gb",
@@ -227,6 +249,8 @@ export const gpus: GPU[] = [
     priceUSD: 379,
     tdpWatts: 180,
     architecture: "Blackwell",
+    fp16TFLOPS: 28.0,
+    fp4Capable: true,
   },
   {
     id: "rtx-5060-ti-16gb",
@@ -237,6 +261,8 @@ export const gpus: GPU[] = [
     priceUSD: 429,
     tdpWatts: 180,
     architecture: "Blackwell",
+    fp16TFLOPS: 28.0,
+    fp4Capable: true,
   },
   {
     id: "rtx-5070",
@@ -247,6 +273,8 @@ export const gpus: GPU[] = [
     priceUSD: 549,
     tdpWatts: 250,
     architecture: "Blackwell",
+    fp16TFLOPS: 42.0,
+    fp4Capable: true,
   },
   {
     id: "rtx-5070-ti",
@@ -257,6 +285,8 @@ export const gpus: GPU[] = [
     priceUSD: 749,
     tdpWatts: 300,
     architecture: "Blackwell",
+    fp16TFLOPS: 69.0,
+    fp4Capable: true,
   },
   {
     id: "rtx-5080",
@@ -267,6 +297,8 @@ export const gpus: GPU[] = [
     priceUSD: 999,
     tdpWatts: 360,
     architecture: "Blackwell",
+    fp16TFLOPS: 56.0,
+    fp4Capable: true,
   },
   {
     id: "rtx-5090",
@@ -277,6 +309,8 @@ export const gpus: GPU[] = [
     priceUSD: 1999,
     tdpWatts: 575,
     architecture: "Blackwell",
+    fp16TFLOPS: 105.0,
+    fp4Capable: true,
   },
 
   // ─── NVIDIA Datacenter ─────────────────────────────────────
@@ -289,6 +323,7 @@ export const gpus: GPU[] = [
     priceUSD: 0.53,
     tdpWatts: 70,
     architecture: "Turing",
+    fp16TFLOPS: 8.1,
   },
   {
     id: "v100-16gb",
@@ -299,6 +334,7 @@ export const gpus: GPU[] = [
     priceUSD: 2.48,
     tdpWatts: 300,
     architecture: "Volta",
+    fp16TFLOPS: 28.3,
   },
   {
     id: "v100-32gb",
@@ -309,6 +345,7 @@ export const gpus: GPU[] = [
     priceUSD: 3.06,
     tdpWatts: 300,
     architecture: "Volta",
+    fp16TFLOPS: 28.3,
   },
   {
     id: "a10",
@@ -319,6 +356,7 @@ export const gpus: GPU[] = [
     priceUSD: 1.10,
     tdpWatts: 150,
     architecture: "Ampere",
+    fp16TFLOPS: 31.2,
   },
   {
     id: "a100-40gb",
@@ -329,6 +367,7 @@ export const gpus: GPU[] = [
     priceUSD: 3.67,
     tdpWatts: 250,
     architecture: "Ampere",
+    fp16TFLOPS: 77.97,
   },
   {
     id: "a100-80gb",
@@ -339,6 +378,7 @@ export const gpus: GPU[] = [
     priceUSD: 2.50,
     tdpWatts: 300,
     architecture: "Ampere",
+    fp16TFLOPS: 77.97,
   },
   {
     id: "l4",
@@ -349,6 +389,7 @@ export const gpus: GPU[] = [
     priceUSD: 0.81,
     tdpWatts: 72,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 30.3,
   },
   {
     id: "l40s",
@@ -359,6 +400,7 @@ export const gpus: GPU[] = [
     priceUSD: 2.70,
     tdpWatts: 350,
     architecture: "Ada Lovelace",
+    fp16TFLOPS: 91.6,
   },
   {
     id: "h100-sxm",
@@ -369,6 +411,7 @@ export const gpus: GPU[] = [
     priceUSD: 2.50,
     tdpWatts: 700,
     architecture: "Hopper",
+    fp16TFLOPS: 267.6,
   },
   {
     id: "h100-pcie",
@@ -379,6 +422,7 @@ export const gpus: GPU[] = [
     priceUSD: 4.00,
     tdpWatts: 350,
     architecture: "Hopper",
+    fp16TFLOPS: 150.0,
   },
   {
     id: "h200",
@@ -389,6 +433,7 @@ export const gpus: GPU[] = [
     priceUSD: 3.50,
     tdpWatts: 700,
     architecture: "Hopper",
+    fp16TFLOPS: 267.6,
   },
   {
     id: "b100",
@@ -399,6 +444,8 @@ export const gpus: GPU[] = [
     priceUSD: 5.00,
     tdpWatts: 700,
     architecture: "Blackwell",
+    fp16TFLOPS: 350.0,
+    fp4Capable: true,
   },
   {
     id: "b200",
@@ -409,6 +456,8 @@ export const gpus: GPU[] = [
     priceUSD: 6.25,
     tdpWatts: 1000,
     architecture: "Blackwell",
+    fp16TFLOPS: 450.0,
+    fp4Capable: true,
   },
   {
     id: "b300",
@@ -419,6 +468,8 @@ export const gpus: GPU[] = [
     priceUSD: 7.00,
     tdpWatts: 1400,
     architecture: "Blackwell",
+    fp16TFLOPS: 500.0,
+    fp4Capable: true,
   },
   {
     id: "gb200",
@@ -429,6 +480,8 @@ export const gpus: GPU[] = [
     priceUSD: 15.00,
     tdpWatts: 2700,
     architecture: "Blackwell",
+    fp16TFLOPS: 900.0,
+    fp4Capable: true,
   },
   {
     id: "gb300",
@@ -439,16 +492,21 @@ export const gpus: GPU[] = [
     priceUSD: 18.00,
     tdpWatts: 3500,
     architecture: "Blackwell",
+    fp16TFLOPS: 1000.0,
+    fp4Capable: true,
   },
   {
     id: "dgx-spark",
     name: "DGX Spark (GB10)",
-    tier: "NVIDIA Datacenter",
+    tier: "NVIDIA Consumer",
     vramGB: 128,
     bandwidthGBs: 273,
     priceUSD: 3999,
     tdpWatts: 140,
     architecture: "Blackwell",
+    fp16TFLOPS: 100.0,
+    fp4Capable: true,
+    memoryEfficiency: 0.65,
   },
 
   // ─── AMD Consumer (RDNA 3) ─────────────────────────────────
@@ -461,6 +519,7 @@ export const gpus: GPU[] = [
     priceUSD: 270,
     tdpWatts: 165,
     architecture: "RDNA 3",
+    fp16TFLOPS: 21.5,
   },
   {
     id: "rx-7700-xt",
@@ -471,6 +530,7 @@ export const gpus: GPU[] = [
     priceUSD: 450,
     tdpWatts: 245,
     architecture: "RDNA 3",
+    fp16TFLOPS: 35.2,
   },
   {
     id: "rx-7800-xt",
@@ -481,6 +541,7 @@ export const gpus: GPU[] = [
     priceUSD: 500,
     tdpWatts: 263,
     architecture: "RDNA 3",
+    fp16TFLOPS: 37.3,
   },
   {
     id: "rx-7900-xt",
@@ -491,6 +552,7 @@ export const gpus: GPU[] = [
     priceUSD: 900,
     tdpWatts: 315,
     architecture: "RDNA 3",
+    fp16TFLOPS: 51.5,
   },
   {
     id: "rx-7900-xtx",
@@ -501,6 +563,7 @@ export const gpus: GPU[] = [
     priceUSD: 1000,
     tdpWatts: 355,
     architecture: "RDNA 3",
+    fp16TFLOPS: 61.4,
   },
 
   // ─── AMD Consumer (RDNA 4) ─────────────────────────────────
@@ -513,6 +576,7 @@ export const gpus: GPU[] = [
     priceUSD: 299,
     tdpWatts: 150,
     architecture: "RDNA 4",
+    fp16TFLOPS: 23.0,
   },
   {
     id: "rx-9060-xt-16gb",
@@ -523,6 +587,7 @@ export const gpus: GPU[] = [
     priceUSD: 349,
     tdpWatts: 160,
     architecture: "RDNA 4",
+    fp16TFLOPS: 23.0,
   },
   {
     id: "rx-9070",
@@ -533,6 +598,7 @@ export const gpus: GPU[] = [
     priceUSD: 549,
     tdpWatts: 220,
     architecture: "RDNA 4",
+    fp16TFLOPS: 45.0,
   },
   {
     id: "rx-9070-xt",
@@ -543,6 +609,7 @@ export const gpus: GPU[] = [
     priceUSD: 599,
     tdpWatts: 304,
     architecture: "RDNA 4",
+    fp16TFLOPS: 53.0,
   },
 
   // ─── AMD Datacenter ────────────────────────────────────────
@@ -555,6 +622,7 @@ export const gpus: GPU[] = [
     priceUSD: 3.50,
     tdpWatts: 560,
     architecture: "CDNA 2",
+    fp16TFLOPS: 95.7,
   },
   {
     id: "mi300x",
@@ -565,6 +633,7 @@ export const gpus: GPU[] = [
     priceUSD: 2.00,
     tdpWatts: 750,
     architecture: "CDNA 3",
+    fp16TFLOPS: 163.4,
   },
   {
     id: "mi325x",
@@ -575,6 +644,7 @@ export const gpus: GPU[] = [
     priceUSD: 2.50,
     tdpWatts: 1000,
     architecture: "CDNA 3",
+    fp16TFLOPS: 163.4,
   },
   {
     id: "mi350x",
@@ -585,6 +655,7 @@ export const gpus: GPU[] = [
     priceUSD: 5.00,
     tdpWatts: 750,
     architecture: "CDNA 4",
+    fp16TFLOPS: 200.0,
   },
   {
     id: "mi355x",
@@ -595,6 +666,7 @@ export const gpus: GPU[] = [
     priceUSD: 6.00,
     tdpWatts: 1400,
     architecture: "CDNA 4",
+    fp16TFLOPS: 250.0,
   },
 
   // ─── Intel ─────────────────────────────────────────────────
@@ -607,6 +679,7 @@ export const gpus: GPU[] = [
     priceUSD: 350,
     tdpWatts: 225,
     architecture: "Alchemist",
+    fp16TFLOPS: 19.7,
   },
   {
     id: "arc-b570",
@@ -617,6 +690,7 @@ export const gpus: GPU[] = [
     priceUSD: 219,
     tdpWatts: 150,
     architecture: "Battlemage",
+    fp16TFLOPS: 18.0,
   },
   {
     id: "arc-b580",
@@ -627,6 +701,7 @@ export const gpus: GPU[] = [
     priceUSD: 249,
     tdpWatts: 190,
     architecture: "Battlemage",
+    fp16TFLOPS: 22.0,
   },
 
   // ─── Apple Silicon (M1) ────────────────────────────────────
@@ -639,6 +714,7 @@ export const gpus: GPU[] = [
     priceUSD: 700,
     tdpWatts: 15,
     architecture: "M1",
+    fp16TFLOPS: 2.6,
   },
   {
     id: "m1-16gb",
@@ -649,6 +725,7 @@ export const gpus: GPU[] = [
     priceUSD: 900,
     tdpWatts: 15,
     architecture: "M1",
+    fp16TFLOPS: 2.6,
   },
   {
     id: "m1-pro",
@@ -659,6 +736,7 @@ export const gpus: GPU[] = [
     priceUSD: 2000,
     tdpWatts: 30,
     architecture: "M1",
+    fp16TFLOPS: 5.2,
   },
   {
     id: "m1-max",
@@ -669,6 +747,7 @@ export const gpus: GPU[] = [
     priceUSD: 3000,
     tdpWatts: 60,
     architecture: "M1",
+    fp16TFLOPS: 10.4,
   },
   {
     id: "m1-max-64gb",
@@ -679,6 +758,7 @@ export const gpus: GPU[] = [
     priceUSD: 3500,
     tdpWatts: 60,
     architecture: "M1",
+    fp16TFLOPS: 10.4,
   },
   {
     id: "m1-ultra-128gb",
@@ -689,6 +769,7 @@ export const gpus: GPU[] = [
     priceUSD: 5000,
     tdpWatts: 120,
     architecture: "M1",
+    fp16TFLOPS: 20.8,
   },
 
   // ─── Apple Silicon (M2) ────────────────────────────────────
@@ -701,6 +782,7 @@ export const gpus: GPU[] = [
     priceUSD: 800,
     tdpWatts: 15,
     architecture: "M2",
+    fp16TFLOPS: 3.6,
   },
   {
     id: "m2-24gb",
@@ -711,6 +793,7 @@ export const gpus: GPU[] = [
     priceUSD: 1200,
     tdpWatts: 15,
     architecture: "M2",
+    fp16TFLOPS: 3.6,
   },
   {
     id: "m2-pro-32gb",
@@ -721,6 +804,7 @@ export const gpus: GPU[] = [
     priceUSD: 2500,
     tdpWatts: 30,
     architecture: "M2",
+    fp16TFLOPS: 6.8,
   },
   {
     id: "m2-max-96gb",
@@ -731,6 +815,7 @@ export const gpus: GPU[] = [
     priceUSD: 4000,
     tdpWatts: 60,
     architecture: "M2",
+    fp16TFLOPS: 13.6,
   },
   {
     id: "m2-ultra-192gb",
@@ -741,6 +826,7 @@ export const gpus: GPU[] = [
     priceUSD: 6000,
     tdpWatts: 120,
     architecture: "M2",
+    fp16TFLOPS: 27.2,
   },
 
   // ─── Apple Silicon (M3) ────────────────────────────────────
@@ -753,6 +839,7 @@ export const gpus: GPU[] = [
     priceUSD: 800,
     tdpWatts: 15,
     architecture: "M3",
+    fp16TFLOPS: 4.1,
   },
   {
     id: "m3-pro-36gb",
@@ -763,6 +850,7 @@ export const gpus: GPU[] = [
     priceUSD: 2500,
     tdpWatts: 30,
     architecture: "M3",
+    fp16TFLOPS: 7.4,
   },
   {
     id: "m3-max-48gb",
@@ -773,6 +861,7 @@ export const gpus: GPU[] = [
     priceUSD: 3500,
     tdpWatts: 60,
     architecture: "M3",
+    fp16TFLOPS: 14.2,
   },
   {
     id: "m3-max-96gb",
@@ -783,6 +872,7 @@ export const gpus: GPU[] = [
     priceUSD: 4500,
     tdpWatts: 60,
     architecture: "M3",
+    fp16TFLOPS: 14.2,
   },
   {
     id: "m3-max-128gb",
@@ -793,6 +883,7 @@ export const gpus: GPU[] = [
     priceUSD: 5000,
     tdpWatts: 60,
     architecture: "M3",
+    fp16TFLOPS: 14.2,
   },
   {
     id: "m3-ultra-192gb",
@@ -803,6 +894,7 @@ export const gpus: GPU[] = [
     priceUSD: 5000,
     tdpWatts: 120,
     architecture: "M3",
+    fp16TFLOPS: 27.2,
   },
   {
     id: "m3-ultra-512gb",
@@ -813,6 +905,7 @@ export const gpus: GPU[] = [
     priceUSD: 8000,
     tdpWatts: 120,
     architecture: "M3",
+    fp16TFLOPS: 27.2,
   },
 
   // ─── Apple Silicon (M4) ────────────────────────────────────
@@ -825,6 +918,7 @@ export const gpus: GPU[] = [
     priceUSD: 600,
     tdpWatts: 22,
     architecture: "M4",
+    fp16TFLOPS: 4.6,
   },
   {
     id: "m4-24gb",
@@ -835,6 +929,7 @@ export const gpus: GPU[] = [
     priceUSD: 800,
     tdpWatts: 22,
     architecture: "M4",
+    fp16TFLOPS: 4.6,
   },
   {
     id: "m4-32gb",
@@ -845,6 +940,7 @@ export const gpus: GPU[] = [
     priceUSD: 1000,
     tdpWatts: 22,
     architecture: "M4",
+    fp16TFLOPS: 4.6,
   },
   {
     id: "m4-pro-24gb",
@@ -855,6 +951,7 @@ export const gpus: GPU[] = [
     priceUSD: 2000,
     tdpWatts: 40,
     architecture: "M4",
+    fp16TFLOPS: 9.2,
   },
   {
     id: "m4-pro-48gb",
@@ -865,6 +962,7 @@ export const gpus: GPU[] = [
     priceUSD: 2500,
     tdpWatts: 40,
     architecture: "M4",
+    fp16TFLOPS: 9.2,
   },
   {
     id: "m4-max-36gb",
@@ -875,6 +973,7 @@ export const gpus: GPU[] = [
     priceUSD: 3200,
     tdpWatts: 75,
     architecture: "M4",
+    fp16TFLOPS: 14.7,
   },
   {
     id: "m4-max-48gb",
@@ -885,6 +984,7 @@ export const gpus: GPU[] = [
     priceUSD: 3500,
     tdpWatts: 100,
     architecture: "M4",
+    fp16TFLOPS: 22.1,
   },
   {
     id: "m4-max-64gb",
@@ -895,6 +995,7 @@ export const gpus: GPU[] = [
     priceUSD: 4000,
     tdpWatts: 100,
     architecture: "M4",
+    fp16TFLOPS: 22.1,
   },
   {
     id: "m4-max-128gb",
@@ -905,6 +1006,7 @@ export const gpus: GPU[] = [
     priceUSD: 5000,
     tdpWatts: 100,
     architecture: "M4",
+    fp16TFLOPS: 22.1,
   },
 ];
 

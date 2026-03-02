@@ -14,9 +14,11 @@ interface Props {
   currentGpu: GPU;
 }
 
+type SortKey = "tps" | "prefill" | "vram" | "name";
+
 export default function ComparisonTable({ model, quantization, gpuCount, currentGpu }: Props) {
   const [entries, setEntries] = useState<GPU[]>([]);
-  const [sortBy, setSortBy] = useState<"tps" | "vram" | "name">("tps");
+  const [sortBy, setSortBy] = useState<SortKey>("tps");
 
   const allEntries: ComparisonEntry[] = [currentGpu, ...entries].map((gpu) => ({
     gpu,
@@ -28,6 +30,7 @@ export default function ComparisonTable({ model, quantization, gpuCount, current
 
   const sorted = [...allEntries].sort((a, b) => {
     if (sortBy === "tps") return b.result.tps - a.result.tps;
+    if (sortBy === "prefill") return (b.result.prefillTps ?? -1) - (a.result.prefillTps ?? -1);
     if (sortBy === "vram") return a.result.totalVRAM - b.result.totalVRAM;
     return a.gpu.name.localeCompare(b.gpu.name);
   });
@@ -71,7 +74,12 @@ export default function ComparisonTable({ model, quantization, gpuCount, current
                 <th className="text-left py-2 pr-4">GPU</th>
                 <th className="text-left py-2 pr-4">
                   <button onClick={() => setSortBy("tps")} className="flex items-center gap-1 hover:text-slate-300">
-                    Speed <ArrowUpDown className="w-3 h-3" />
+                    Decode <ArrowUpDown className="w-3 h-3" />
+                  </button>
+                </th>
+                <th className="text-left py-2 pr-4">
+                  <button onClick={() => setSortBy("prefill")} className="flex items-center gap-1 hover:text-slate-300">
+                    Prefill <ArrowUpDown className="w-3 h-3" />
                   </button>
                 </th>
                 <th className="text-left py-2 pr-4">
@@ -93,6 +101,11 @@ export default function ComparisonTable({ model, quantization, gpuCount, current
                   </td>
                   <td className="py-3 pr-4 text-blue-300 font-mono font-medium">
                     {formatTPS(entry.result.tps)} t/s
+                  </td>
+                  <td className="py-3 pr-4 text-purple-300 font-mono font-medium">
+                    {entry.result.prefillTps !== null ? `${formatTPS(entry.result.prefillTps)} t/s` : (
+                      <span className="text-slate-600">N/A</span>
+                    )}
                   </td>
                   <td className="py-3 pr-4 text-slate-400 font-mono">
                     {formatVRAM(entry.result.totalVRAM)} / {formatVRAM(entry.result.availableVRAM)}

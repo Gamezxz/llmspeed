@@ -7,7 +7,8 @@ export function calculate(
   gpuCount: number
 ): CalculationResult {
   const totalVRAMAvailable = gpu.vramGB * gpuCount;
-  const totalBandwidth = gpu.bandwidthGBs * gpuCount;
+  const memoryEfficiency = gpu.memoryEfficiency ?? 1.0;
+  const totalBandwidth = gpu.bandwidthGBs * gpuCount * memoryEfficiency;
 
   // ─── VRAM calculation ────────────────────────────────────
   const effectiveParams = model.totalParams;
@@ -18,7 +19,12 @@ export function calculate(
   const totalVRAM = modelVRAM + kvCache + overhead;
   const fitsInVRAM = totalVRAM <= totalVRAMAvailable;
 
-  // ─── TPS calculation ─────────────────────────────────────
+  // ─── FP4 compatibility check ───────────────────────────
+  const isFp4Quant = quant.requiresHardwareSupport === true;
+  const gpuSupportsFp4 = gpu.fp4Capable === true;
+  const fp4Mismatch = isFp4Quant && !gpuSupportsFp4;
+
+  // ─── Decode TPS calculation ────────────────────────────
   const activeParams = model.activeParams ?? model.totalParams;
   const bytesPerParam = quant.bitsPerWeight / 8;
   const activeModelSize = activeParams * bytesPerParam;
@@ -64,7 +70,68 @@ export function calculate(
     tps *= 0.07;
   }
 
+  // FP4 on non-capable hardware: severe decode penalty
+  if (fp4Mismatch) {
+    tps *= 0.15;
+  }
+
   tps = Math.max(0.1, tps);
+
+  // ─── Prefill TPS calculation ───────────────────────────
+  let prefillTps: number | null = null;
+
+  if (gpu.fp16TFLOPS !== undefined) {
+    let effectiveTFLOPS = gpu.fp16TFLOPS;
+
+    // FP4 on capable hardware doubles compute throughput
+    if (isFp4Quant && gpuSupportsFp4) {
+      effectiveTFLOPS *= 2;
+    }
+
+    // Multi-GPU scaling for compute (3% overhead per extra GPU, tighter than decode)
+    if (gpuCount > 1) {
+      effectiveTFLOPS *= gpuCount;
+      const efficiency = 1 - (gpuCount - 1) * 0.03;
+      effectiveTFLOPS *= Math.max(efficiency, 0.8);
+    }
+
+    // Prefill formula: effectiveTFLOPS * 1000 / (2 * activeParams)
+    // activeParams is in billions, TFLOPS is 10^12 FLOPS
+    // For a transformer, ~2 FLOPs per parameter per token
+    prefillTps = (effectiveTFLOPS * 1000) / (2 * activeParams);
+
+    // Architecture efficiency multipliers for prefill
+    if (gpu.tier === "Apple Silicon") {
+      prefillTps *= 0.90;
+    } else if (gpu.tier === "AMD Consumer") {
+      prefillTps *= 0.80;
+    } else if (gpu.tier === "Intel") {
+      prefillTps *= 0.70;
+    } else if (gpu.tier === "AMD Datacenter") {
+      prefillTps *= 0.88;
+    } else {
+      // NVIDIA Consumer & Datacenter
+      prefillTps *= 0.92;
+    }
+
+    // VRAM overflow penalty same as decode
+    if (!fitsInVRAM) {
+      prefillTps *= 0.07;
+    }
+
+    // FP4 on non-capable hardware: severe prefill penalty
+    if (fp4Mismatch) {
+      prefillTps *= 0.10;
+    }
+
+    // Cap prefill at reasonable maximum for tiny models (< 1B active params)
+    if (activeParams < 1) {
+      prefillTps = Math.min(prefillTps, 50000);
+    }
+
+    prefillTps = Math.max(0.1, prefillTps);
+    prefillTps = Math.round(prefillTps * 10) / 10;
+  }
 
   // ─── Cost calculation ────────────────────────────────────
   let costPerToken: number | undefined;
@@ -88,9 +155,11 @@ export function calculate(
   }
 
   const rating = getPerformanceRating(tps);
+  const prefillRating = prefillTps !== null ? getPrefillRating(prefillTps) : null;
 
   return {
     tps: Math.round(tps * 10) / 10,
+    prefillTps,
     modelVRAM: Math.round(modelVRAM * 100) / 100,
     kvCache: Math.round(kvCache * 100) / 100,
     overhead,
@@ -98,6 +167,7 @@ export function calculate(
     availableVRAM: totalVRAMAvailable,
     fitsInVRAM,
     rating,
+    prefillRating,
     costPerToken,
     costPer1MTokens: costPer1MTokens !== undefined ? Math.round(costPer1MTokens * 1000) / 1000 : undefined,
     electricityCostPerHour: electricityCostPerHour !== undefined ? Math.round(electricityCostPerHour * 1000) / 1000 : undefined,
@@ -110,5 +180,14 @@ export function getPerformanceRating(tps: number): PerformanceRating {
   if (tps < 30) return "Good";
   if (tps < 60) return "Excellent";
   if (tps < 100) return "Blazing";
+  return "Insane";
+}
+
+export function getPrefillRating(tps: number): PerformanceRating {
+  if (tps < 20) return "Unusable";
+  if (tps < 100) return "Slow";
+  if (tps < 500) return "Good";
+  if (tps < 1500) return "Excellent";
+  if (tps < 5000) return "Blazing";
   return "Insane";
 }
